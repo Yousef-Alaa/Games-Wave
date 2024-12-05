@@ -1,0 +1,515 @@
+$white: #FFF;
+$black: #000;
+$text: var(--text);
+$main: var(--main);
+$mainBg: var(--mainBg);
+
+@function printRGB($color, $opacity) {
+
+  @if ($color == 'main') {
+    @return rgba(#{'var(--rgbmain)'}, $opacity)
+  };
+  
+  @if ($color == 'text') {
+    @return rgba(#{'var(--rgbtext)'}, $opacity)
+  };
+
+};
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --text: #FFF;
+  --rgbtext: 255, 255, 255;
+  --bgNotDarkNotLinear: rgba( var(--rgbmain) , .6);
+}
+
+::-webkit-scrollbar {width: 7px;}
+::-webkit-scrollbar-track {box-shadow: inset 0 0 6px rgba($black, 0.3);background-color: rgb(255 255 255 / 40%);}
+::-webkit-scrollbar-thumb {background-color: $main;}
+
+.ant-spin-fullscreen {background-color: $mainBg !important;}
+
+.ant-upload-list-item {
+  color: $text;
+  .ant-upload-icon span {color: $text !important}
+  .ant-upload-list-item-actions .anticon {color: $text !important}
+  button[title="Remove file"] {opacity: 1 !important;}
+}
+
+.welcome {
+    div {
+        width: 70%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        @media (max-width: 530px) {width: 85%;}
+        svg {max-width: 100%;}
+        a {
+            color: var(--text);
+            background: var(--main);
+            padding: 5px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            border: 1px solid var(--main);
+            transition: .5s ease-in-out;
+            &:hover {                
+                color: var(--main);
+                background: var(--text);
+            }
+        }
+    }
+}
+
+// Market Page
+.market {
+  .ant-table-wrapper {
+    margin-top: 30px;
+    background: transparent !important;
+    th, td {text-align: center !important;}
+    td.ant-table-column-sort {background-color: printRGB('main', .4) !important;}
+    .ant-table {
+      background-color: $mainBg !important;
+      color: $text !important;
+      thead th {background-color: $main !important;color: $white !important;}
+    }
+    .ant-table-tbody>tr>td {padding: 5px !important;}
+    .ant-table-tbody >tr.ant-table-row:hover>td,
+    .ant-table-tbody >tr.ant-table-row-selected >td {background-color: printRGB('main', .4) !important;}
+  
+    ul {
+      justify-content: center !important;
+      li {background-color: transparent !important;}
+      li a {
+        color: $text !important;
+        &:hover {cursor: pointer;}
+      }
+      li:not(.ant-pagination-disabled) button:hover {cursor: pointer;}
+      .ant-pagination-prev button svg,
+      .ant-pagination-next button svg {fill: $text !important;opacity: .88;}
+      .ant-pagination-disabled button svg {fill: $text !important;opacity: .2;}
+      .ant-pagination-item-active {background: transparent;}
+      .ant-pagination-item-active a {color: $main !important;}
+    }
+  }
+  input[type='checkbox']:hover,
+  .ant-dropdown-trigger:hover,
+  .ant-table-column-sorter:hover
+  {cursor: pointer;}
+}
+
+// Settings Page
+.setting-page {
+  .setting-item {
+    color: $white;
+    background: #607D8B;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    span:first-of-type {padding: 6.5px 5px 6.5px 10px;}
+    span:last-of-type {padding: 6.5px 6px 6.5px 5px;display: flex;align-items: center;}
+    span:last-of-type:hover,
+    span:last-of-type svg:hover {cursor: pointer;}
+    svg {cursor: pointer;font-size: 18px;}
+  }
+  
+  .ant-input-number-input-wrap {width: 78px;background-color: $white;}
+  .ant-input-number-group-addon {
+    background-color: $main;
+    color: $white;
+    border: none;
+    font-size: 16px;
+    border-radius: 0;
+    padding: 0;
+    span {
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      svg {width: 30px;}
+    }
+  }
+  button:hover {cursor: pointer;}
+}
+
+// SideBar
+aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: .3s ease;
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+  &.sidebar-bottom {
+    position: fixed;
+    z-index: 3;
+    background: var(--mainBg);
+    top: 50%;
+    width: auto !important;
+    padding-top: 0 !important;
+    left: 0;
+    translate: 0 -50%;
+    box-shadow: 0 0 7px #FFF;
+    border-radius: 0 7px 7px 0;
+    padding: 0 5px;
+    min-width: 5px !important;
+    transition: .5s ease-in-out;
+    .logo {display: none;}
+    ul {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      li {
+        padding: 0 16px !important;
+        span[role='img'] {font-size: 16px;}
+        span.text {display: none;}
+      }
+    }
+  }
+  .logo svg {fill: $text;transition: .3s ease;}
+  ul {
+    list-style: none;
+    width: 100%;
+    transition: .3s ease;
+    li {
+      color: rgba(255, 255, 255, .65);
+      margin: 4px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: color .3s ease, background .3s ease;
+      span:nth-of-type(1) {transition: 0s ease;font-size: var(--fontSize);}
+      span:nth-of-type(2) {
+        overflow: hidden;
+        padding-left: 10px;
+        flex: auto;
+        white-space: nowrap;
+      }
+      svg {fill: rgba(255, 255, 255, .65);}
+      &:hover {
+        background: rgba($black, .08);
+        color: $text;
+        svg {fill: $text;}
+      }
+      &.nav-item-active,
+      &.nav-item-active:hover {
+        background: $main;
+        color: $white;
+        svg {fill: $white;}
+      }
+    }
+  }
+  .trigger {
+    margin-top: auto;
+    margin-bottom: 5px;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    .icons {
+      min-height: 24px;
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+      align-items: center;
+      opacity: .6;
+      transition: opacity .3s ease-in-out;
+      svg {width: 18px !important;}
+      &:hover {opacity: 1;}
+    }
+  }
+}
+
+// Add Order Menu Items
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  gap: 10px;
+  max-height: 345px;
+  overflow-y: scroll;
+  padding: 2px 10px 2px 2px;
+  justify-content: center;
+  @media (max-width: 310px) {
+    grid-template-columns: repeat(auto-fill, 90px);
+  }
+  div {
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+    box-shadow: 0 0 3px #FFF;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15%;
+    &:hover {
+      background: rgba(236, 240, 241, .2);
+    }
+    img {margin-top: auto;user-select: none;}
+    .name {display: block;text-align: center;}
+    .price {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #2980b9;
+      width: 23px;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+  }
+}
+
+// End Time Modal
+.endtime-modal {
+  .ant-modal-title {font-size: 18px;}
+  .head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  h3 {
+    position: relative;
+    font-size: 22px;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 37px;
+      width: 44px;
+      height: 3px;
+      background: #FFF;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 45px;
+      width: 22px;
+      height: 3px;
+      background: #FFF;
+    }
+  }
+}
+
+// Edit The Drawer Component
+.ant-drawer-header-title {
+  button {
+    order: 2;
+    color: $text !important;
+    &:hover {cursor: pointer;}
+  }
+}
+.ant-drawer-content {background: $mainBg !important;}
+.ant-drawer-content {
+  color: $text !important;
+  .ant-drawer-header {border-bottom: 1px solid rgba($text, .2) !important;}
+  .ant-drawer-title {
+    color: $text !important;
+    text-shadow: 2px 3px 8px $text !important;
+  }
+}
+
+@media (max-width: 400px) { .ant-drawer-content-wrapper {width: 100% !important;} }
+
+// Edit Select Menu Components
+.ant-select-selector {
+  background: transparent !important;
+  border-width: 0 0 1px !important;
+  border-bottom-color: $text !important;
+  &:hover {cursor: pointer;}
+}
+.ant-select-focused .ant-select-selector {box-shadow: none !important;}
+.ant-select-selection-item {color: $text !important;}
+.ant-select-arrow {color: $text !important}
+.ant-select-item:hover {background: printRGB('main', .6) !important;color: $text !important;cursor: pointer;}
+.ant-select-item-option-selected {background: $main !important;color: $text !important;}
+
+// Edit Modal Component
+.custom-modal {
+  &.custom-modal-footer .ant-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ant-modal-content {
+    background: printRGB('main', .35) !important;
+    backdrop-filter: blur(10px);
+    color: $white;
+  }
+  .ant-modal-header {background: transparent;}
+  .ant-modal-title {color: $white;}
+  button.ant-modal-close {color: $white;}
+  button.ant-modal-close:hover {color: rgba($white, .7); background-color: transparent;cursor: pointer;}
+  input {
+    background: rgba($white, .4) !important;
+    border: none !important;
+    color: $white !important;
+    &::placeholder {
+      color: rgba($white, .5) !important;
+    }
+    &:disabled {
+      background: #455a64 !important;
+      user-select: none;
+    }
+  }
+  .ant-input-number {
+    background-color: transparent;
+    border: none;
+  }
+  button:hover {cursor: pointer;}
+}
+
+.ant-input-number-handler-wrap span:hover {cursor: pointer;}
+
+.no-data {
+  height: calc(100vh - 86px);
+  text-align: center;
+  position: relative;
+  &.no-data-market {height: calc(100vh - 168px);}
+  &.no-data-reports {height: calc(100vh - 210px);}
+  svg {
+    position: relative;
+    height: 100%;
+    max-width: 100%;
+  }
+  .text {
+    display: block;
+    font-size: 16px;
+    font-weight: normal;
+    translate: 0 -50px;
+    a {font-weight: bold;color: $main;}
+  }
+}
+
+.about-page {
+  padding: 15px 10px;
+  h2 {color: #FFF !important;}
+  > span {color: #FFF !important;display: block;font-size: 1.1rem;}
+  .info-item span {
+    font-size: 1.1rem;
+    color: #FFF;
+    text-transform: capitalize;
+    display: block;
+    margin-block: 12px 6px;
+  }
+  .social {
+    display: flex;
+    a {
+      color: #FFF;
+      background-color: var(--main);
+      font-size: 1.2rem;
+      margin-right: 7px;
+      margin-bottom: 5px;
+      display: flex;
+      border-radius: 50%;
+      width: 33px;
+      aspect-ratio: 1;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--main);
+      transition: .5s ease-in-out;
+      &:hover {color: $main;background-color: #FFF;}
+    }
+  }
+}
+
+.form-control {
+  display: flex;
+    justify-content: center;
+    height: calc(100vh - 38.73px - 30px);
+    flex-direction: column;
+    margin: auto;
+  & > div {max-width: 350px;}
+  h1 {font-size: 32px;margin-bottom: 20px;}
+  form .ant-input-affix-wrapper {margin-bottom: 8px;}
+  .ant-upload-list-item {
+    color: $text;
+    .ant-upload-icon span {color: $text !important}
+    .ant-upload-list-item-actions .anticon {color: $text !important}
+  }
+  button[type="submit"] {margin: 8px 0;}
+  p {text-align: center;margin-top: 3px;}
+}
+
+.profile-page {
+    padding: 20px;
+    .photo {
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        img {
+          width: 140px;
+          height: 140px;
+          object-fit: cover;
+          border-radius: 50%;
+          filter: drop-shadow(2px 4px 7px rgba(255, 255, 255, 0.45));
+        }
+        p {
+            margin-top: 8px;
+            font-size: 16px;
+            font-style: italic;
+            letter-spacing: .3px;
+            color: #B0BEC5;
+            user-select: none;
+        }
+        .edit-btn {
+            padding: 1.5px 5px;
+            background: rgba(255, 255, 255, .6);
+            border: 0;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    }
+    .info {
+        margin: 20px 0;
+        div {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 10px 15px;
+            &:nth-of-type(even) {background-color: printRGB('main', .4);}
+            &:last-of-type {grid-template-columns: 1fr 1fr;}
+            span {
+                &:first-of-type {
+                    font-weight: bold;
+                }
+                &:last-of-type {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+                &.is-verified {font-weight: bold;}
+                svg {cursor: pointer;}
+            }
+        }
+    }
+    .buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}
