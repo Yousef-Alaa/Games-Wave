@@ -52,7 +52,7 @@ app.use(notFound)
 app.use(errorHandler)
 
 
-app.listen(PORT, _ => console.log(`Running At ${PORT}`.bold.brightYellow))
+app.listen(PORT, _ => console.log(`Running At ${PORT}`.bold.brightYellow, `"URL ${process.env.CLIENT_URL}"`))
 
 // Handle rejection outside express
 process.on('unhandledRejection', (err) => {
