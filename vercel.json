@@ -13,12 +13,28 @@
     ],
     "rewrites": [
         {
-        "source": "/api/(.*)",
+        "source": "/api/:path*",
         "destination": "/backend/server.js"
         },
         {
-        "source": "/((?!api/|assets/|.*\\..*).*)",
-        "destination": "/index.html"
+        "source": "/assets/:path*",
+        "destination": "/frontend/assets/:path*"
+        },
+        {
+        "source": "/images/:path*",
+        "destination": "/frontend/images/:path*"
+        },
+        {
+        "source": "/application/:path*",
+        "destination": "/frontend/application/:path*"
+        },
+        {
+        "source": "/favicon.ico",
+        "destination": "/frontend/favicon.ico"
+        },
+        {
+        "source": "/(.*)",
+        "destination": "/frontend/index.html"
         }
     ]
 }
